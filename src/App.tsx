@@ -1,16 +1,14 @@
 import { useEffect, useMemo, useState } from "react";
-import ReactMarkdown from "react-markdown";
 import { categories, terms, type TermCategory } from "./content/terms";
+import { postsBySlug } from "./content/posts";
 import { CategoryFilter } from "./components/CategoryFilter";
+import { EmptyState } from "./components/EmptyState";
+import { PostPreview } from "./components/PostPreview";
+import { SearchInput } from "./components/SearchInput";
 import { TermList } from "./components/TermList";
 import { ThemeToggle } from "./components/ThemeToggle";
-import contentModelingPost from "./content/posts/content-modeling.md?raw";
 
 type Theme = "light" | "dark";
-
-const postsBySlug: Record<string, string> = {
-  "content-modeling": contentModelingPost,
-};
 
 function getInitialTheme(): Theme {
   const savedTheme = localStorage.getItem("termstack-theme");
@@ -29,16 +27,36 @@ function App() {
     "content-modeling",
   );
   const [activeCategory, setActiveCategory] = useState<TermCategory>("All");
+  const [searchQuery, setSearchQuery] = useState("");
   const [theme, setTheme] = useState<Theme>(getInitialTheme);
   const [activePostSlug, setActivePostSlug] = useState<string | null>(null);
 
   const filteredTerms = useMemo(() => {
-    if (activeCategory === "All") return terms;
+    const normalizedQuery = searchQuery.trim().toLowerCase();
 
-    return terms.filter((term) => term.category === activeCategory);
-  }, [activeCategory]);
+    return terms.filter((term) => {
+      const matchesCategory =
+        activeCategory === "All" || term.category === activeCategory;
 
-  const activePost = activePostSlug ? postsBySlug[activePostSlug] : null;
+      const searchableText = [
+        term.title,
+        term.shortDefinition,
+        term.longDefinition,
+        term.category,
+      ]
+        .filter(Boolean)
+        .join(" ")
+        .toLowerCase();
+
+      const matchesSearch =
+        normalizedQuery.length === 0 ||
+        searchableText.includes(normalizedQuery);
+
+      return matchesCategory && matchesSearch;
+    });
+  }, [activeCategory, searchQuery]);
+
+  const activePost = activePostSlug ? postsBySlug[activePostSlug] ?? null : null;
 
   useEffect(() => {
     localStorage.setItem("termstack-theme", theme);
@@ -50,12 +68,25 @@ function App() {
     setActivePostSlug(null);
   }
 
+  function handleSearchChange(value: string) {
+    setSearchQuery(value);
+    setActiveTermId(null);
+    setActivePostSlug(null);
+  }
+
   function handleToggleTerm(id: string) {
     setActiveTermId((currentId) => (currentId === id ? null : id));
   }
 
   function handleToggleTheme() {
     setTheme((currentTheme) => (currentTheme === "light" ? "dark" : "light"));
+  }
+
+  function handleResetFilters() {
+    setActiveCategory("All");
+    setSearchQuery("");
+    setActiveTermId("content-modeling");
+    setActivePostSlug(null);
   }
 
   return (
@@ -80,26 +111,27 @@ function App() {
           onCategoryChange={handleCategoryChange}
         />
 
-        <TermList
-          terms={filteredTerms}
-          activeTermId={activeTermId}
-          onToggleTerm={handleToggleTerm}
-          onReadPost={setActivePostSlug}
+        <SearchInput
+          searchQuery={searchQuery}
+          onSearchChange={handleSearchChange}
         />
 
-        {activePost && (
-          <article className="post-preview">
-            <button
-              className="text-button"
-              type="button"
-              onClick={() => setActivePostSlug(null)}
-            >
-              Close article
-            </button>
+        <p className="result-summary" aria-live="polite">
+          Showing {filteredTerms.length} of {terms.length} terms
+        </p>
 
-            <ReactMarkdown>{activePost}</ReactMarkdown>
-          </article>
+        {filteredTerms.length > 0 ? (
+          <TermList
+            terms={filteredTerms}
+            activeTermId={activeTermId}
+            onToggleTerm={handleToggleTerm}
+            onReadPost={setActivePostSlug}
+          />
+        ) : (
+          <EmptyState searchQuery={searchQuery} onReset={handleResetFilters} />
         )}
+
+        <PostPreview post={activePost} onClose={() => setActivePostSlug(null)} />
       </section>
     </main>
   );

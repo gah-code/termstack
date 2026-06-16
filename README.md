@@ -33,6 +33,15 @@ TermStack is designed to make complex terms easier to learn through:
 - Markdown article preview
 - Accessible accordion relationships
 - Reduced-motion support
+- Search input
+- Search and category filtering together
+- Result count
+- Empty state for no matches
+- Expanded starter term list
+- Markdown post registry
+- Reusable post preview component
+- Multiple Markdown learning posts
+- Term-to-post linking by slug
 
 ## Project Structure
 
@@ -43,10 +52,17 @@ termstack/
 │   ├── content/
 │   │   ├── terms.ts
 │   │   └── posts/
-│   │       └── content-modeling.md
+│   │       ├── index.ts
+│   │       ├── content-modeling.md
+│   │       ├── content-type.md
+│   │       ├── prompt-workflow.md
+│   │       └── taxonomy.md
 │   ├── components/
 │   │   ├── AccordionItem.tsx
 │   │   ├── CategoryFilter.tsx
+│   │   ├── EmptyState.tsx
+│   │   ├── PostPreview.tsx
+│   │   ├── SearchInput.tsx
 │   │   ├── ThemeToggle.tsx
 │   │   └── TermList.tsx
 │   ├── styles/
@@ -79,13 +95,20 @@ Status: Complete
 
 ### Phase 02 — Component Refinement and Interaction Polish
 
+Status: Complete
+
+### Phase 03 — Search and Content Scaling
+
+Status: Complete
+
+### Phase 04 — Markdown Post System
+
 Status: In Progress
 
 ## Next Planned Features
 
 - More glossary terms
 - More Markdown posts
-- Search input
 - Related terms
 - Blog-style post routes
 - Contentful-ready content model

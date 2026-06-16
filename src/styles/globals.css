@@ -141,6 +141,78 @@ h1 {
   color: var(--bg);
 }
 
+.search-shell {
+  display: grid;
+  gap: var(--space-2);
+  margin: 0 auto var(--space-4);
+}
+
+.search-label {
+  color: var(--muted);
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.search-input {
+  width: 100%;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 1rem 1.1rem;
+  background: var(--surface);
+  color: var(--text);
+  box-shadow: var(--shadow);
+  transition:
+    border-color var(--motion-fast),
+    box-shadow var(--motion-fast),
+    background-color var(--motion-fast);
+}
+
+.search-input::placeholder {
+  color: var(--muted);
+}
+
+.search-input:focus {
+  border-color: var(--accent);
+  outline: none;
+}
+
+.result-summary {
+  margin: 0 0 var(--space-4);
+  color: var(--muted);
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+.empty-state {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-8);
+  background: var(--surface);
+  box-shadow: var(--shadow);
+  text-align: center;
+}
+
+.empty-state-kicker {
+  margin: 0 0 var(--space-2);
+  color: var(--muted);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.empty-state h2 {
+  margin: 0;
+  font-size: clamp(1.5rem, 4vw, 2.4rem);
+}
+
+.empty-state p {
+  max-width: 440px;
+  margin: var(--space-4) auto 0;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
 .term-list {
   display: grid;
   gap: var(--space-3);
@@ -262,6 +334,41 @@ h1 {
 
 .post-preview button {
   margin-bottom: var(--space-4);
+}
+
+.post-preview-header {
+  margin-bottom: var(--space-6);
+  border-bottom: 1px solid var(--border);
+  padding-bottom: var(--space-5);
+}
+
+.post-preview-kicker {
+  margin: 0 0 var(--space-2);
+  color: var(--muted);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.post-body h1 {
+  margin-top: 0;
+  font-size: clamp(1.8rem, 5vw, 3rem);
+  line-height: 1;
+}
+
+.post-body h2 {
+  margin-top: var(--space-8);
+  font-size: 1.35rem;
+}
+
+.post-body ul,
+.post-body ol {
+  padding-left: 1.25rem;
+}
+
+.post-body li + li {
+  margin-top: var(--space-2);
 }
 
 @keyframes page-enter {
