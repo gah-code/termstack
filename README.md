@@ -71,3 +71,5 @@ export default defineConfig([
   },
 ])
 ```
+
+## Phase 01: React foundation : Done
