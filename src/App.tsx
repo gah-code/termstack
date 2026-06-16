@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import ReactMarkdown from "react-markdown";
 import { categories, terms, type TermCategory } from "./content/terms";
 import { CategoryFilter } from "./components/CategoryFilter";
@@ -6,16 +6,30 @@ import { TermList } from "./components/TermList";
 import { ThemeToggle } from "./components/ThemeToggle";
 import contentModelingPost from "./content/posts/content-modeling.md?raw";
 
+type Theme = "light" | "dark";
+
 const postsBySlug: Record<string, string> = {
   "content-modeling": contentModelingPost,
 };
+
+function getInitialTheme(): Theme {
+  const savedTheme = localStorage.getItem("termstack-theme");
+
+  if (savedTheme === "light" || savedTheme === "dark") {
+    return savedTheme;
+  }
+
+  const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+
+  return prefersDark ? "dark" : "light";
+}
 
 function App() {
   const [activeTermId, setActiveTermId] = useState<string | null>(
     "content-modeling",
   );
   const [activeCategory, setActiveCategory] = useState<TermCategory>("All");
-  const [theme, setTheme] = useState<"light" | "dark">("light");
+  const [theme, setTheme] = useState<Theme>(getInitialTheme);
   const [activePostSlug, setActivePostSlug] = useState<string | null>(null);
 
   const filteredTerms = useMemo(() => {
@@ -23,6 +37,12 @@ function App() {
 
     return terms.filter((term) => term.category === activeCategory);
   }, [activeCategory]);
+
+  const activePost = activePostSlug ? postsBySlug[activePostSlug] : null;
+
+  useEffect(() => {
+    localStorage.setItem("termstack-theme", theme);
+  }, [theme]);
 
   function handleCategoryChange(category: TermCategory) {
     setActiveCategory(category);
@@ -37,8 +57,6 @@ function App() {
   function handleToggleTheme() {
     setTheme((currentTheme) => (currentTheme === "light" ? "dark" : "light"));
   }
-
-  const activePost = activePostSlug ? postsBySlug[activePostSlug] : null;
 
   return (
     <main className="app" data-theme={theme}>

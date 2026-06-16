@@ -1,75 +1,91 @@
-# React + TypeScript + Vite
+# TermStack
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+TermStack is a lightweight React glossary for learning technical, content strategy, CMS, SEO, frontend, and AI workflow terms.
 
-Currently, two official plugins are available:
+The project starts as a simple single-page glossary and will grow into a structured learning hub with Markdown-powered articles.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Purpose
 
-## React Compiler
+TermStack is designed to make complex terms easier to learn through:
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- Clear definitions
+- Category filters
+- Accordion-style learning cards
+- Light and dark mode
+- Markdown-based deeper learning posts
 
-## Expanding the ESLint configuration
+## Tech Stack
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- React
+- TypeScript
+- Vite
+- CSS variables
+- React Markdown
+- Local Markdown files
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## Current Features
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+- Responsive single-page layout
+- FAQ-style accordion interaction
+- Category filtering
+- Light/dark mode
+- Theme persistence with localStorage
+- Markdown article preview
+- Accessible accordion relationships
+- Reduced-motion support
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## Project Structure
+
+```txt
+termstack/
+├── public/
+├── src/
+│   ├── content/
+│   │   ├── terms.ts
+│   │   └── posts/
+│   │       └── content-modeling.md
+│   ├── components/
+│   │   ├── AccordionItem.tsx
+│   │   ├── CategoryFilter.tsx
+│   │   ├── ThemeToggle.tsx
+│   │   └── TermList.tsx
+│   ├── styles/
+│   │   ├── globals.css
+│   │   └── tokens.css
+│   ├── App.tsx
+│   └── main.tsx
+├── package.json
+└── README.md
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Run Locally
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm install
+npm run dev
 ```
 
-## Phase 01: React foundation : Done
+## Build
+
+```bash
+npm run build
+```
+
+## Phase Status
+
+### Phase 01 — React Foundation
+
+Status: Complete
+
+### Phase 02 — Component Refinement and Interaction Polish
+
+Status: In Progress
+
+## Next Planned Features
+
+- More glossary terms
+- More Markdown posts
+- Search input
+- Related terms
+- Blog-style post routes
+- Contentful-ready content model

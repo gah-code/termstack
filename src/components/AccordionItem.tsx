@@ -13,23 +13,32 @@ export function AccordionItem({
   onToggle,
   onReadPost,
 }: AccordionItemProps) {
+  const triggerId = `${term.id}-trigger`;
+  const panelId = `${term.id}-panel`;
+
   return (
     <article className={isOpen ? "term-card is-open" : "term-card"}>
       <button
+        id={triggerId}
         className="term-trigger"
         type="button"
         aria-expanded={isOpen}
-        aria-controls={`${term.id}-panel`}
+        aria-controls={panelId}
         onClick={onToggle}
       >
         <span>{term.title}</span>
 
         <span className="term-icon" aria-hidden="true">
-          {isOpen ? "x" : "+"}
+          {isOpen ? "×" : "+"}
         </span>
       </button>
 
-      <div id={`${term.id}-panel`} className="term-panel" role="region">
+      <div
+        id={panelId}
+        className="term-panel"
+        role="region"
+        aria-labelledby={triggerId}
+      >
         <div className="term-content">
           <p>{term.shortDefinition}</p>
 
