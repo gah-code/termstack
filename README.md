@@ -19,6 +19,7 @@ TermStack is designed to make complex terms easier to learn through:
 - React
 - TypeScript
 - Vite
+- React Router
 - CSS variables
 - React Markdown
 - Local Markdown files
@@ -30,7 +31,6 @@ TermStack is designed to make complex terms easier to learn through:
 - Category filtering
 - Light/dark mode
 - Theme persistence with localStorage
-- Markdown article preview
 - Accessible accordion relationships
 - Reduced-motion support
 - Search input
@@ -39,15 +39,29 @@ TermStack is designed to make complex terms easier to learn through:
 - Empty state for no matches
 - Expanded starter term list
 - Markdown post registry
-- Reusable post preview component
 - Multiple Markdown learning posts
 - Term-to-post linking by slug
+- React Router routes
+- Dedicated Markdown post detail pages
+- Glossary-to-post navigation
+- Not found page
+- Netlify SPA redirect support
+- Branded visual system
+- Refined typography tokens
+- Markdown table support with `remark-gfm`
+- Styled Markdown tables
+- Brand guidelines documentation
 
 ## Project Structure
 
 ```txt
 termstack/
+├── docs/
+│   └── BRAND-GUIDELINES.md
 ├── public/
+│   ├── _redirects
+│   ├── favicon.svg
+│   └── icons.svg
 ├── src/
 │   ├── content/
 │   │   ├── terms.ts
@@ -61,10 +75,14 @@ termstack/
 │   │   ├── AccordionItem.tsx
 │   │   ├── CategoryFilter.tsx
 │   │   ├── EmptyState.tsx
-│   │   ├── PostPreview.tsx
+│   │   ├── PostArticle.tsx
 │   │   ├── SearchInput.tsx
 │   │   ├── ThemeToggle.tsx
 │   │   └── TermList.tsx
+│   ├── pages/
+│   │   ├── GlossaryPage.tsx
+│   │   ├── PostPage.tsx
+│   │   └── NotFoundPage.tsx
 │   ├── styles/
 │   │   ├── globals.css
 │   │   └── tokens.css
@@ -103,6 +121,14 @@ Status: Complete
 
 ### Phase 04 — Markdown Post System
 
+Status: Complete
+
+### Phase 05 — Routing and Blog Detail Pages
+
+Status: Complete
+
+### Phase 06 — Visual System, Typography, and Markdown Tables
+
 Status: In Progress
 
 ## Next Planned Features
@@ -110,5 +136,4 @@ Status: In Progress
 - More glossary terms
 - More Markdown posts
 - Related terms
-- Blog-style post routes
 - Contentful-ready content model

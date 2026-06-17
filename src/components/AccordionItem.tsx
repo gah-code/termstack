@@ -1,17 +1,16 @@
+import { Link } from "react-router-dom";
 import type { Term } from "../content/terms";
 
 type AccordionItemProps = {
   term: Term;
   isOpen: boolean;
   onToggle: () => void;
-  onReadPost: (slug: string) => void;
 };
 
 export function AccordionItem({
   term,
   isOpen,
   onToggle,
-  onReadPost,
 }: AccordionItemProps) {
   const triggerId = `${term.id}-trigger`;
   const panelId = `${term.id}-panel`;
@@ -48,13 +47,12 @@ export function AccordionItem({
             <span>{term.category}</span>
 
             {term.relatedPostSlug && (
-              <button
+              <Link
                 className="text-button"
-                type="button"
-                onClick={() => onReadPost(term.relatedPostSlug!)}
+                to={`/posts/${term.relatedPostSlug}`}
               >
                 Read deeper
-              </button>
+              </Link>
             )}
           </div>
         </div>
