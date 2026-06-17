@@ -1,4 +1,4 @@
-# Taxonomy
+## Overview
 
 Taxonomy is the system used to classify, group, and organize content.
 

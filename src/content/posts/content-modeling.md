@@ -1,4 +1,4 @@
-# Content Modeling
+## Overview
 
 Content modeling is the practice of defining reusable structures for content.
 

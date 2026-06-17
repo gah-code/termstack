@@ -51,13 +51,19 @@ TermStack is designed to make complex terms easier to learn through:
 - Markdown table support with `remark-gfm`
 - Styled Markdown tables
 - Brand guidelines documentation
+- Responsive refinement for mobile, tablet, and desktop layouts
+- Mobile-friendly category filters
+- Improved small-screen typography
+- Safer Markdown table overflow behavior
+- Responsive QA documentation
 
 ## Project Structure
 
 ```txt
 termstack/
 ├── docs/
-│   └── BRAND-GUIDELINES.md
+│   ├── BRAND-GUIDELINES.md
+│   └── RESPONSIVE-QA.md
 ├── public/
 │   ├── _redirects
 │   ├── favicon.svg
@@ -128,6 +134,10 @@ Status: Complete
 Status: Complete
 
 ### Phase 06 — Visual System, Typography, and Markdown Tables
+
+Status: Complete
+
+### Phase 07 — Responsive Refinement
 
 Status: In Progress
 

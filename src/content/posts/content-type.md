@@ -1,4 +1,4 @@
-# Content Type
+## Overview
 
 A content type is a reusable structure that defines the fields, rules, and purpose of a specific kind of content.
 

@@ -16,7 +16,23 @@ export function PostArticle({ post }: PostArticleProps) {
       </div>
 
       <div className="post-body">
-        <ReactMarkdown remarkPlugins={[remarkGfm]}>{post.body}</ReactMarkdown>
+        <ReactMarkdown
+          remarkPlugins={[remarkGfm]}
+          components={{
+            table: ({ children }) => (
+              <div
+                className="markdown-table-wrap"
+                role="region"
+                aria-label="Scrollable table"
+                tabIndex={0}
+              >
+                <table>{children}</table>
+              </div>
+            ),
+          }}
+        >
+          {post.body}
+        </ReactMarkdown>
       </div>
     </article>
   );
